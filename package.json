@@ -1,0 +1,20 @@
+{
+  "name": "project_files",
+  "version": "1.0.0",
+  "description": "MVC cooking site",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon main.js"
+  },
+  "author": "Debo Isola",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "http-status-codes": "^2.1.4",
+    "mongoose": "^5.11.8",
+    "nodemon": "^2.0.6"
+  }
+}
