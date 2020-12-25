@@ -9,6 +9,7 @@ const express = require("express"),
     errorController = require("./controllers/errorController"),
     subscriberController = require("./controllers/subscriberController"),
     usersController = require("./controllers/usersController"),
+    methodOverride = require("method-override"),
     mongoose = require("mongoose");
 
 mongoose.connect("mongodb+srv://ad_iso:Ceaser02ish@cluster0.pvakz.mongodb.net/recipe_db?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -34,6 +35,10 @@ app.use(homeController.logRequestPaths);
 
 app.use("/", router);
 
+router.use(methodOverride("_method", {
+    methods: ["POST", "GET"]
+}));
+
 router.get("/", homeController.index);
 router.get("/courses", homeController.showCourses);
 
@@ -46,7 +51,9 @@ router.get("/users", usersController.index, usersController.indexView);
 router.get("/users/new", usersController.new);
 router.get("/users/:id", usersController.show, usersController.showView)
 router.post("/users/create", usersController.create, usersController.redirectView);
-
+router.get("/users/:id/edit", usersController.edit);
+router.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
+router.put("/users/:id/update", usersController.update, usersController.redirectView);
 
 app.use(errorController.pageNotFound);
 app.use(errorController.internalServerError);
