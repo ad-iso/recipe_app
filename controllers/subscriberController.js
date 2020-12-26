@@ -60,5 +60,39 @@ module.exports = {
     },
     showView: ( req, res ) => {
         res.render("subscribers/show");
+    },
+
+    edit: (req, res, next) => {
+        let subscriberId = req.params.id;
+        Subscriber.findById(subscriberId)
+        .then(subscriber => {
+            res.render("subscribers/edit", {
+                subscriber: subscriber
+            });
+        })
+        .catch(error => {
+            console.log(`Error fectching by subscriberId ${error.message}`);
+            next(error);
+        })
+    },
+    update: (req, res, next) => {
+        let subscriberId = req.params.id;
+        subscriberParams = {
+            name: req.body.name,
+            email: req.body.email,
+            zipCode: req.body.zipCode
+        };
+        Subscriber.findByIdAndUpdate(subscriberId, {
+            $set: subscriberParams
+        })
+        .then( subscriber => {
+            res.locals.redirect = `/subscribers/${suscriberId}`;
+            res.locals.subscriber = subscriber;
+            next();
+        })
+        .catch(error => {
+            console.log(`Error updating the subscriber by ID: ${error.message}`);
+            next(error);
+        })
     }
 };

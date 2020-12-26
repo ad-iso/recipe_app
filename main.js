@@ -46,6 +46,7 @@ router.get("/contact", subscriberController.new);
 router.get("/subscribers", subscriberController.index, subscriberController.indexView);
 router.get("/subscribers/:id", subscriberController.show, subscriberController.showView);
 router.post("/subscribers/create", subscriberController.create, subscriberController.redirectView);
+router.get("/subscribers/new", subscriberController.new);
 
 router.get("/users", usersController.index, usersController.indexView);
 router.get("/users/new", usersController.new);

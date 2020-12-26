@@ -52,6 +52,7 @@ Subscriber = require("./subscriber"),
             next();
         }
     });
+    
     userSchema.virtual("fullName")
     .get(function() {
         return `${this.name.first} ${this.name.last}`;

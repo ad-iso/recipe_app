@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-
-const courseSchema = new mongoose.Schema({
+const mongoose = require("mongoose"),
+    { Schema } = mongoose,
+    courseSchema = new mongoose.Schema({
     title:{
         type: String,
         required: true,
@@ -10,12 +10,19 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    items: [],
-    zipCode: {
+    maxStudents: {
         type: Number,
         min: [1000, "Zip Code too short"],
         max: 99999
     },
-});
+    cost: {
+        type: Number,
+        default: 0,
+        min: [0, "Course cannot have a negative cost"]
+    }
+},{
+    timestamps: true
+}
+);
 
 module.exports = mongoose.model("Course", courseSchema);

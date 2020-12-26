@@ -22,11 +22,11 @@
                 <td><%= user.zipCode %></td>
                 <td><%= user.findLength() %></td>
                 <td>
-                    <a href="<%=`/users/${user._id}/edit` %>">Edit
+                    <a href="<%=`users/${user._id}/edit` %>">Edit
                     </a>
                 </td>
                 <td>
-                    <a href="<%=`/users/${user._id}/delete?_method=DELETE` %>" onclick ="return confirm('Are you sure you want to delete this record?')">Delete
+                    <a href="<%=`users/${user._id}/delete?_method=DELETE` %>" onclick ="return confirm('Are you sure you want to delete this record?')">Delete
                     </a>
                 </td>
             </tr>
