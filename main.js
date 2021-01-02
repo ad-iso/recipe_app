@@ -1,5 +1,7 @@
 "use strict";
 
+const coursesController = require("./controllers/coursesController");
+
 
 const express = require("express"),
     app = express(),
@@ -40,21 +42,24 @@ router.use(methodOverride("_method", {
 }));
 
 router.get("/", homeController.index);
-router.get("/courses", homeController.showCourses);
 
-router.get("/contact", subscriberController.new);
 router.get("/subscribers", subscriberController.index, subscriberController.indexView);
-router.get("/subscribers/:id", subscriberController.show, subscriberController.showView);
-router.post("/subscribers/create", subscriberController.create, subscriberController.redirectView);
 router.get("/subscribers/new", subscriberController.new);
+router.post("/subscribers/create", subscriberController.create, subscriberController.redirectView);
+router.get("/subscribers/:id", subscriberController.show, subscriberController.showView);
+router.get("/subscribers/:id/edit", subscriberController.edit)
+router.put("/subscribers/:id/update", subscriberController.update, subscriberController. redirectView);
+router.get("/subscribers/:id/delete", subscriberController.delete, subscriberController.redirectView);
 
 router.get("/users", usersController.index, usersController.indexView);
 router.get("/users/new", usersController.new);
 router.get("/users/:id", usersController.show, usersController.showView)
 router.post("/users/create", usersController.create, usersController.redirectView);
 router.get("/users/:id/edit", usersController.edit);
-router.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
 router.put("/users/:id/update", usersController.update, usersController.redirectView);
+router.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
+
+router.get("/courses", coursesController.index, coursesController.indexView);
 
 app.use(errorController.pageNotFound);
 app.use(errorController.internalServerError);

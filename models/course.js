@@ -1,6 +1,6 @@
 const mongoose = require("mongoose"),
-    { Schema } = mongoose,
-    courseSchema = new mongoose.Schema({
+    { Schema } = require("mongoose"),
+    courseSchema = new Schema({
     title:{
         type: String,
         required: true,
@@ -12,8 +12,8 @@ const mongoose = require("mongoose"),
     },
     maxStudents: {
         type: Number,
-        min: [1000, "Zip Code too short"],
-        max: 99999
+        default: 0,
+        min: [0, "Cannot have negative number of students"]
     },
     cost: {
         type: Number,

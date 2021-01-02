@@ -1,4 +1,3 @@
-const user = require("../models/user");
 const User = require("../models/user");
 
 module.exports = {
@@ -54,7 +53,7 @@ module.exports = {
             res.locals.user = user;
             next();
         })
-        .catch(error => {
+        .catch(error => {    
             console.log(`Error fetching user by ID: ${error.message}`);
             next(error);
         });
@@ -101,10 +100,10 @@ module.exports = {
     },
     delete: (req, res, next) =>  {
         let userId = req.params.id;
-        user.findByIdAndDelete(userId)
+        User.findByIdAndDelete(userId)
         .then(() => {
             res.locals.redirect = "/users";
-            next()
+            next();
         })
         .catch(error => {
             console.log(`Error deleting user by ID: ${error.message}`);

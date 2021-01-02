@@ -17,8 +17,8 @@
                 <td><%=courses.description %></td>
                 <td><%=courses.maxStudents %></td>
                 <td><%=courses.cost %></td>
-                <td><a href="<%= `courses/${course._id}/edit` %>">Edit</a></td>
-                <td><a href="<%= `courses/${course._id}/delete?_method=DELETE` %>" 
+                <td><a href="<%= `courses/${courses._id}/edit` %>">Edit</a></td>
+                <td><a href="<%= `courses/${courses._id}/delete?_method=DELETE` %>" 
                     onclick="return confirm(`Are you sure you want to delete this record?`)">Delete</a></td>
             </tr>
        <% }); %>

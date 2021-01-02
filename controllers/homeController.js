@@ -18,13 +18,7 @@ var courses = [
 module.exports = {
     index:(req, res) => {
         res.render("index");
-    },
-    
-    showCourses : (req, res) => {
-    res.render("courses", {
-        offeredCourses: courses
-    });
-},     
+    },  
     logRequestPaths : (req, res, next) => {
     console.log(`Request made to ${req.url}`);
     next();

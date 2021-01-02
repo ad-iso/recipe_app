@@ -1,8 +1,8 @@
 const mongoose = require("mongoose"),
+{ Schema } = require("mongoose"),
 Subscriber = require("./subscriber"),
-{Schema} = mongoose,
 
-    userSchema = new mongoose.Schema({
+    userSchema = new Schema({
         name: {
             first: {
                 type: String,
@@ -57,11 +57,29 @@ Subscriber = require("./subscriber"),
     .get(function() {
         return `${this.name.first} ${this.name.last}`;
     });
+    userSchema.pre("save", function(next) {
+        let user = this;
+        if (user.subscribedAccount === undefined) {
+            Subscriber.findOne({
+                email: user.email
+            })
+            .then(subscriber => {
+                user.subscribedAccount = subscriber;
+                next();
+            })
+            .catch(error => {
+                console.log(`Error in connecting subscriber: ${error.message}`);
+                next(error);
+            });
+        } else {
+            next();
+        }
+    });
 
     userSchema.methods.findLength = function() {
         fullLength = this.name.first.length + this.name.last.length;
         return fullLength;
-    }
+    };
 
 
 module.exports = mongoose.model("User", userSchema);
